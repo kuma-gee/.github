@@ -1,0 +1,11 @@
+{
+    "name": "Godot Steam Release Workflow",
+    "description": "Release a godot game to steam and github",
+    "iconName": "rocket",
+    "categories": [
+        "deployment"
+    ],
+    "filePatterns": [
+        "**/project.godot"
+    ]
+}
