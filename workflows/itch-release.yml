@@ -1,0 +1,45 @@
+name: Itch Release
+
+on:
+  workflow_call:
+    inputs:
+      channels:
+        description: 'Channels to build'
+        required: true
+        type: string
+      game:
+        description: 'Game name'
+        required: true
+        type: string
+      itch-user:
+        description: 'Itch.io user'
+        required: true
+        type: string
+    secrets:
+      PASSWORD:
+        description: 'Password for the files'
+        required: false
+      BUTLER_API_KEY:
+        description: 'Butler API key'
+        required: true
+
+jobs:
+  release-itch:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        channel: ${{ fromJson(inputs.channels) }}
+    steps:
+      - uses: kuma-gee/action-godot/fetch-release@main
+        with:
+          artifacts: release-${{ matrix.channel }}
+          password: ${{ secrets.PASSWORD }}
+          output: build
+
+      - name: Publish Itch
+        run: butler push build/$CHANNEL $USER/$GAME:$CHANNEL --userversion $GITHUB_REF_NAME
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+          USER: ${{ inputs.itch-user }}
+          CHANNEL: ${{ matrix.channel }}
+          GAME: ${{ inputs.game }}
