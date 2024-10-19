@@ -1,7 +1,7 @@
 {
     "name": "Godot Template Workflow",
     "description": "Build godot templates for godot",
-    "iconName": "file-zip-24",
+    "iconName": "octicon file-zip",
     "categories": [
         "deployment"
     ],

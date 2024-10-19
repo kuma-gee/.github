@@ -1,0 +1,11 @@
+{
+    "name": "Game Jam Release Workflow",
+    "description": "Used for releasing games for game jams",
+    "iconName": "octicon zap",
+    "categories": [
+        "deployment"
+    ],
+    "filePatterns": [
+        "**/project.godot"
+    ]
+}
